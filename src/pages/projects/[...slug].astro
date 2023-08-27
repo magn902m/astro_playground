@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import projectData from "../../data/projects.json";
+
+interface Props {
+    heading: string;
+    descShort: string;
+    descLong: string;
+    img: string;
+    alt: string;
+    localHref: string;
+    prodHref: string;
+    githubHref: string;
+    skills: [];
+}
+
+export async function getStaticPaths() {
+    return projectData.map((project) => {
+        return {
+            params: {
+                slug: project["localHref"],
+            },
+            props: { ...project },
+        };
+    });
+}
+
+const { heading, descShort, descLong, img, alt, localHref, prodHref, githubHref, skills } =
+    Astro.props;
+---
+
+<!-- <script>
+    document.querySelector("#fetch").addEventListener("click", fetch)
+    async function fetch() {
+        const url = "../../data/projects.json"
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+    }
+</script>
+<button id="fetch">Fetch</button> -->
+<BaseLayout title="Project">
+    <main
+        class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16"
+    >
+        <section
+            id="projects_section"
+            class="col-[2/3] px-4 flex flex-col justify-center items-center gap-12"
+        >
+            <h1 class="text-7xl text-center uppercase font-black">{heading}</h1>
+            <article class="flex gap-8 flex-wrap items-center justify-center">
+                <img src={"/assets/images/projects/" + img} alt={alt} class="rounded-xl w-1/2" />
+
+                <a
+                    href={prodHref}
+                    class="inline-block relative bg-accent-light rounded-xl mt-auto max-w-lg group hover:-translate-y-2 transition duration-150"
+                    >Demo</a
+                >
+                <a
+                    href={githubHref}
+                    class="inline-block relative bg-accent-light rounded-xl mt-auto max-w-lg group hover:-translate-y-2 transition duration-150"
+                    >Github</a
+                >
+
+                <p>{descLong}</p>
+
+                <p>wrong format: {skills}</p>
+                <div class="flex gap-4">
+                {
+                    skills.map((skill) => {
+                        <p>{skill}</p>;
+                    })
+                }
+                </div>
+            </article>
+        </section>
+    </main>
+</BaseLayout>

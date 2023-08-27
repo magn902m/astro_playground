@@ -1,0 +1,60 @@
+---
+---
+
+<script>
+    const quotesArr = [
+        { quote: "interested in how people think", author: "Magnus Nielsen" },
+        { quote: "interested in how people do what they do", author: "Magnus Nielsen" },
+        { quote: "i love turtles!", author: "Magnus Nielsen" },
+        { quote: "interested in the Internet", author: "Magnus Nielsen" },
+        { quote: "I love nature", author: "Magnus Nielsen" },
+        { quote: "I like new challenges", author: "Magnus Nielsen" },
+        { quote: "I love beer!", author: "Magnus Nielsen" },
+        { quote: "I like coding", author: "Magnus Nielsen" },
+        { quote: "I like music", author: "Magnus Nielsen" },
+    ];
+
+    const quote = document.querySelector("#quote");
+    const quoteAuthor = document.querySelector("#quote__author");
+    const quoteBtn = document.querySelector("#quote__btn");
+
+    const setRandomQuote = () => {
+        let randomQuoteIndex = Math.floor(Math.random() * quotesArr.length);
+        // const randomQuote = quotesArr[(Math.floor(Math.random() * quotesArr.length))];
+
+        let quoteData = quotesArr[randomQuoteIndex];
+        if (quoteData.quote === quote.textContent) {
+            quoteAuthor.textContent = `script.js error...`;
+            quote.textContent = `You hit the same quote, that was random.`;
+            return;
+        }
+
+        quoteData.quote =
+            quoteData.quote.charAt(0).toUpperCase() + quoteData.quote.substring(1).toLowerCase();
+
+        const quoteEndChar = quoteData.quote.charAt(quoteData.quote.length - 1);
+        if (!(quoteEndChar === "." || quoteEndChar === "?" || quoteEndChar === "!")) {
+            quoteData.quote = quoteData.quote + ".";
+        }
+
+        quoteAuthor.textContent = `${quoteData.author}`;
+        quote.textContent = `${quoteData.quote}`;
+    };
+
+    quoteBtn.addEventListener("click", () => setRandomQuote());
+    setRandomQuote();
+</script>
+
+<button id="quote__btn" class="w-full flex flex-col gap-1 justify-center items-center p-4 rounded-b-xl hover:bg-accent-light duration-300">
+    <span class="italic font-bold text-xl">"<span id="quote"></span>"</span>
+    <span id="quote__author"></span>
+</button>
+
+<!-- With a visible button -->
+<!-- <div class="w-full flex flex-col justify-center text-center p-4">
+    <div>
+        <p class="italic font-bold text-xl">"<span id="quote" class=""></span>"</p>
+        <p class=""><span id="quote__author" class=""></span></p>
+    </div>
+    <button id="quote__btn" class="bg-accent-light py-2 px-4 rounded-xl">New quote?</button>
+</div> -->

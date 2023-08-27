@@ -1,0 +1,34 @@
+[
+    {
+        "heading": "Twitte clone",
+        "descShort": "Building a fullstack web app, with the core features of Twitter",
+        "descLong": "descLong",
+        "img": "twitter_clone.png",
+        "alt": "Twitte clone",
+        "localHref": "twitter-clone",
+        "prodHref": "https://webdevbymagnus.eu.pythonanywhere.com/",
+        "skills": ["HTML", "Tailwind", "JS", "Python", "SQL"]
+    },
+    {
+        "heading": "Hogwarts student list",
+        "descShort": "Working with data cleaing, sorting, filtering and other functions",
+        "descLong": "This project is about i was hired by Hogwarts School of Witchcraft and Wizardry, as a frontender, to help build a system so the administrator can handle the student lists. The assignment was to get some JSON data and cleaning it, make a sort and filter function, and assign students to different kind of role. To complete the projcet there was a lot of wireframe and acticy digram involde. If you want to see more of the progress, then click the button.",
+        "img": "hogwarts_student_list.png",
+        "alt": "Hogwarts student list",
+        "localHref": "hogwarts-student-list",
+        "prodHref": "https://magn902m.github.io/hacked_hogwarts/",
+        "githubHref": "https://github.com/magn902m/hacked_hogwarts",
+        "skills": ["HTML", "CSS", "JS", "Rest api"]
+    },
+    {
+        "heading": "Webshop for payment terminals",
+        "descShort": "The final project for my multimedia designer education",
+        "descLong": "descLong",
+        "img": "webshop_payment_terminals.png",
+        "alt": "Webshop",
+        "localHref": "webshop-payment-terminals",
+        "prodHref": "https://mmd-hovedopgaven.web.app/",
+        "githubHref": "https://github.com/magn902m/mmd-hovedopgaven",
+        "skills": ["React", "Scss", "Firebase", "Three.js", "Blender", "Figma"]
+    }
+]

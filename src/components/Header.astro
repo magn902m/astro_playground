@@ -1,0 +1,128 @@
+---
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+---
+
+<script>
+    const navLinks = document.querySelectorAll("#main__nav a");
+    const windowPathname = window.location.pathname;
+
+    // styling active link
+    navLinks.forEach((navLink) => {
+        const navLinkPathname = new URL(navLink.href).pathname;
+        windowPathname === navLinkPathname && navLink.classList.add("active");
+        windowPathname !== navLinkPathname && navLink.classList.remove("active");
+    });
+
+    const menuToggle = document.querySelector("#menu__toggle");
+    const menuBox = document.querySelector(".menu__box");
+    const menuOverlay = document.querySelector(".menu__overlay");
+
+    // toggle mobile menu
+    menuToggle.addEventListener("click", () => {
+        menuBox.classList.toggle("flex");
+        menuBox.classList.toggle("hidden");
+        menuOverlay.classList.toggle("hidden");
+    });
+
+    // closing mobile menu if clicking other places
+    menuOverlay.addEventListener("mouseup", (elm) => {
+        if (!menuBox.contains(elm.target)) {
+            menuBox.classList.toggle("flex");
+            menuBox.classList.toggle("hidden");
+            menuOverlay.classList.toggle("hidden");
+            menuToggle.checked = false;
+        }
+    });
+</script>
+
+<header class="sticky top-0 z-50 w-full bg-background-light dark:bg-background-dark">
+    <nav id="main__nav" class="flex justify-between items-center p-4 relative">
+        <div class="logo">
+            <a href="/" class=" no-underline">
+                <!-- <img src="/assets/images/logo.svg" class="w-8 h-8" alt="" /> -->
+                <div class="text-4xl">🐢</div>
+            </a>
+        </div>
+
+        <div class="right flex flex-row items-center gap-4">
+            <ThemeSwitcher />
+            <div id="menu_mobile" class="md:hidden">
+                <input
+                    id="menu__toggle"
+                    type="checkbox"
+                    class="opacity-0 block h-[26px] w-[26px]"
+                />
+                <label
+                    for="menu__toggle"
+                    class="menu__btn absolute top-[50%] h-[26px] w-[26px] z-20 cursor-pointer">
+                    <span class="before:top-[-8px] after:top-[8px]"></span></label
+                >
+            </div>
+            <ul
+                class="menu__box flex-col gap-4 absolute p-4 md:p-0 hidden left-0 top-full w-full z-20 list-none bg-accent-light shadow-xl text-xl font-semibold md:static md:flex md:flex-row md:justify-between md:bg-opacity-0 md:shadow-none">
+                {
+                    [
+                        ["projects", "/projects"],
+                        ["blog", "/blog"],
+                        ["about", "/about"],
+                    ].map(([title, url]) => (
+                        <li>
+                            <a href={url} class="btn__hover py-2 px-3 rounded-xl">
+                                {title}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+            <div class="menu__overlay w-full h-full z-10 fixed top-0 left-0 hidden"></div>
+        </div>
+    </nav>
+</header>
+
+<style>
+    .active {
+        text-decoration: underline;
+    }
+
+    #menu__toggle:checked + .menu__btn > span {
+        transform: rotate(45deg);
+    }
+
+    #menu__toggle:checked + .menu__btn > span::before {
+        top: 0;
+        transform: rotate(0deg);
+    }
+
+    #menu__toggle:checked + .menu__btn > span::after {
+        top: 0;
+        transform: rotate(90deg);
+    }
+
+    .menu__btn > span,
+    .menu__btn > span::before,
+    .menu__btn > span::after {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-color: var(--color-text-light);
+        transition-duration: 0.25s;
+        border-radius: 10%;
+    }
+
+    .btn__hover {
+        background: linear-gradient(0deg, var(--color-primary-light), var(--color-primary-light)) no-repeat right bottom / 0
+            var(--bg-h);
+        transition: background-size 350ms;
+        --bg-h: 100%;
+
+        /* For underline */
+        /* --bg-h: 2px;
+        padding-bottom: 2px; */
+    }
+
+    .btn__hover:where(:hover, :focus-visible) {
+        background-size: 100% var(--bg-h);
+        background-position-x: left;
+    }
+</style>

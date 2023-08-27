@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import projectData from "../data/projects.json";
+---
+
+<BaseLayout title="Magnus Nielsen - Projects">
+    <main
+        class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16"
+    >
+        <section
+            id="projects_section"
+            class="col-[2/3] px-4 flex flex-col justify-center items-center gap-12"
+        >
+            <h1 class="text-7xl text-center uppercase font-black">My projects</h1>
+			<article class="flex gap-8 flex-wrap items-center justify-center">
+                {projectData.map((data) => <ProjectCard {...data} />)}
+            </article>
+        </section>
+
+        <section id="lab_section" class="col-[2/3] flex flex-col items-center gap-12 px-4">
+            <h2 class="text-4xl uppercase font-semibold">Labs</h2>
+            <p>Small frontend function an such</p>
+        </section>
+    </main>
+</BaseLayout>
+
+<style></style>

@@ -1,0 +1,110 @@
+---
+import QuoteSwicher from "../components/QuoteSwicher.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Magnus Nielsen - About">
+    <main
+        class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16">
+        <section
+            id="intro_section"
+            class="col-[2/3] px-4 flex flex-col justify-center items-center gap-12">
+            <h1 class="text-7xl text-center uppercase font-black">I'm Magnus</h1>
+            <article class="flex flex-col md:grid grid-cols-2 gap-4">
+                <div class="col-[1/2] w-[75%] place-self-center">
+                    <img
+                        src="/assets/images/magnus_nielsen.jpeg"
+                        alt="Picture of Magnus Nielsen"
+                        class="rounded-t-full"
+                    />
+                    <div class="bg-primary-light dark:bg-primary-dark rounded-b-xl">
+                        <QuoteSwicher />
+                    </div>
+                </div>
+                <div class="col-[2/3] place-self-center flex flex-col gap-4">
+                    <h3 class="text-2xl uppercase font-bold">
+                        I'm mostly a web developer & multimedia designer, who has a passion for the
+                        web
+                    </h3>
+                    <p class="">
+                        I have worked with code & design seriously since 2021, but it has always
+                        been around in my life. In fact, when I was younger, my plan was to be a
+                        programmer but i changed my mind, and somehow i end up here.
+                        <br />
+                        <br />
+
+                        I've worked in various areas of web development, UI/UX, design & more. I
+                        like to learn new thing and be challenges to be better.
+                        <br />
+                        <br />
+
+                        <span class="hover:underline decoration-dotted decoration-4">
+                            Communication, Creative & Curious
+                        </span>
+                    </p>
+                </div>
+            </article>
+        </section>
+        <section class="col-[2/3] px-4 flex flex-col justify-center items-center gap-8">
+            <h2 class="text-4xl text-center pt-4 uppercase font-semibold">Top skills & experiences</h2>
+
+            <article
+                class="flex flex-wrap justify-center gap-8 [&>div]:flex [&>div]:flex-col [&>div]:items-center [&>div>img]:w-[25%]">
+                <div>
+                    <img src="/assets/icons/skills/html-icon.svg" alt="html icon" />
+                    <p>HTML</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/css-icon.svg" alt="css icon" />
+                    <p>CSS</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/js-icon.svg" alt="js icon" />
+                    <p>JS</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/tailwind-icon.svg" alt="tailwind icon" />
+                    <p>Tailwind</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/react-icon.svg" alt="react icon" />
+                    <p>React</p>
+                </div>
+                <div>
+                    <img
+                        src="/assets/icons/skills/nextjs-icon.svg"
+                        alt="nextjs icon"
+                        class="bg-[#fff] rounded-full"
+                    />
+                    <p>Next.js</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/node-icon.svg" alt="node icon" />
+                    <p>Node</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/python-icon.svg" alt="python icon" />
+                    <p>Python</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/sql-icon.svg" alt="sql icon" />
+                    <p>SQL / NoSQL</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/git-icon.svg" alt="git icon" />
+                    <p>Git</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/figma-icon.svg" alt="figma icon" />
+                    <p>Figma</p>
+                </div>
+                <div>
+                    <img src="/assets/icons/skills/adobe-icon.svg" alt="adobe icon" />
+                    <p>Adobe</p>
+                </div>
+            </article>
+        </section>
+    </main>
+</BaseLayout>
+
+<style></style>

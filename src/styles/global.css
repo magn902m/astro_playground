@@ -1,0 +1,56 @@
+/******* Fonts *******/
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+h1, h2, h3, h4, h5, h6, p, a {
+  /* font-family: 'Jost', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
+}
+
+/******* Colors *******/
+/* Colors from tailwind.config.cjs */
+:root {
+  --color-text-light: theme('colors.text.light');
+  --color-text-dark: theme('colors.text.dark');
+  --color-background-light: theme('colors.background.light');
+  --color-background-dark: theme('colors.background.dark');
+  --color-primary-light: theme('colors.primary.light');
+  --color-primary-dark: theme('colors.primary.dark');
+  --color-secondary-light: theme('colors.secondary.light');
+  --color-secondary-dark: theme('colors.secondary.dark');
+  --color-accent-light: theme('colors.accent.light');
+  --color-accent-dark: theme('colors.accent.dark');
+}
+
+/******* Global *******/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 72px;
+}
+
+body {
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.5;
+  font-size: 16px;
+  background-color: var(--color-background-light);
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+

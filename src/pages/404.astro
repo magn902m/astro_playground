@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<script>
+    document.querySelector("#btn__back").addEventListener("click", () => history.back());
+</script>
+
+<BaseLayout title="Magnus Nielsen - 404">
+    <main
+        class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16"
+    >
+        <section id="projects" class="col-[2/3] flex flex-col items-center gap-8 px-4">
+            <h1 class="text-7xl uppercase font-black">404</h1>
+            <h2 class="text-4xl font-semibold">
+                I looks like, this pages doesn't exist or it has been moved.
+            </h2>
+            <div>
+                <p class="text-xl font-bold">
+                    Try another page or
+                    <button id="btn__back" class="bg-primary-light py-2 px-3 rounded-xl transition duration-200 hover:bg-accent-light">
+                        Go back
+                    </button>
+                </p>
+
+                <article class="flex gap-4 flex-wrap"></article>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

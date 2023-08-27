@@ -1,0 +1,26 @@
+---
+interface Props {
+    heading: string;
+    descShort: string;
+    img: string;
+    alt: string;
+    localHref: string;
+}
+
+const { heading, descShort, img, alt, localHref } = Astro.props;
+---
+
+<a
+    href={"/projects/" + localHref}
+    class="inline-block relative bg-accent-light rounded-xl mt-auto max-w-lg group hover:-translate-y-2 transition duration-150"
+>
+    <img
+        src={"/assets/images/projects/" + img}
+        alt={alt}
+        class="rounded-t-xl opacity-75 group-hover:opacity-100"
+    />
+    <!-- <p class="hidden group-hover:flex absolute top-2/4 left-1/4">{descShort}</p> -->
+    <div class="p-4 mt-auto">
+        <h1 class="text-lg sm:text-2xl font-bold">{heading}</h1>
+    </div>
+</a>

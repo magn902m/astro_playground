@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<script>
+    // How the danish cpr num is build: https://cpr.dk/cpr-systemet/opbygning-af-cpr-nummeret
+    // Regex to get danish cpr num: https://www.w3resource.com/javascript-exercises/javascript-regexp-exercise-15.php
+    // A project, there has build a cpr num lib: https://github.com/mathiasvr/danish-ssn
+    // Get fake danish cpr num: https://www.fakenamegenerator.com/gen-random-dk-dk.php
+
+    const cpr = document.querySelector('#cpr-num');
+    const cprNumInputHint = document.querySelector('.cpr-num-hint');
+    const isCPRValid = document.querySelector('.isCPRValid');
+    const age = document.querySelector('.age');
+    const birth = document.querySelector('.birth');
+    const gender = document.querySelector('.gender');
+
+    function validateCPRNum(cpr) {
+        // link to regex source: https://regex101.com/library/K0yPqX
+        const cprRegex = /^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])\d{2}[-]?\d{4}$/gm;
+        if (cprRegex.test(cpr)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getGender(cpr) {
+        return cpr % 2 ? 'Male' : 'Female';
+    }
+
+    function getDate(cpr) {
+        const digit7 = parseInt(cpr[6], 10);
+
+        const dateSegments = cpr.substring(0, 6).match(/.{1,2}/g);
+        let date = new Date(Date.UTC(dateSegments[2], dateSegments[1] - 1, dateSegments[0], 0, 0, 0, 0));
+
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+
+        // century correction
+        if (digit7 === 4 || digit7 === 9) {
+            // 1900 or 2000
+            if (year <= 1936) {
+                date = new Date(Date.UTC(year + 100, month, day, 0, 0, 0, 0));
+            }
+        } else if (digit7 > 4) {
+            // 1800 or 2000
+            date = new Date(Date.UTC(year > 1957 ? year - 100 : year + 100, month, day, 0, 0, 0, 0));
+        }
+
+        const dateFormat = date.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+        });
+        return dateFormat;
+    }
+
+    function getAge(cpr) {
+        // format to vaild date
+        const dateString = cpr;
+        const dateParts = dateString.split('/');
+        const cprDay = parseInt(dateParts[0]);
+        const cprMonth = parseInt(dateParts[1]);
+        const cprYear = parseInt(dateParts[2]);
+        // month is 0-based, that's why we need dataParts[1] - 1
+        const dateObject = new Date(cprYear, cprMonth - 1, cprDay);
+
+        const dob = new Date(dateObject);
+        //calculate month difference from current date in time
+        const month_diff = Date.now() - dob.getTime();
+
+        //convert the calculated difference in date format
+        const age_dt = new Date(month_diff);
+
+        //extract year from date
+        const year = age_dt.getUTCFullYear();
+
+        //now calculate the age of the user
+        const age = Math.abs(year - 1970);
+
+        //display the calculated age
+        return age;
+    }
+
+    function sumProduct(a, b) {
+        return a.reduce(function (sum, digit, i) {
+            return sum + digit * b[i];
+        }, 0);
+    }
+
+    function modulo11(cpr) {
+        const multipliers = [4, 3, 2, 7, 6, 5, 4, 3, 2, 1];
+        return sumProduct(cpr.split(''), multipliers) % 11;
+    }
+
+    function isValid(cpr) {
+        return modulo11(cpr) === 0;
+    }
+
+    // validate cpr by correcting/adding the check digit
+    function validate(cpr) {
+        cpr = cpr.substring(0, 9);
+        console.log(cpr);
+        const checkDigit = (11 - modulo11(cpr)) % 11;
+        console.log(checkDigit);
+        return checkDigit === 10 ? null : cpr + checkDigit;
+    }
+
+    function getCprInfo(cpr) {
+        return {
+            cpr: cpr,
+            valid: isValid(cpr),
+            date: getDate(cpr),
+            age: getAge(getDate(cpr)),
+            gender: getGender(cpr),
+        };
+    }
+
+    function checkCPR(cprNum) {
+        cpr.value = cpr.value.replace('-', '');
+        const cprValue = cpr.value
+
+        cprNumInputHint.textContent = ""
+        const validateCPR = validateCPRNum(cprValue) ? true : false;
+        if (!validateCPR) {
+            isCPRValid.textContent = 'invaild';
+            gender.textContent = "unknown";
+            birth.textContent = "unknown";
+            age.textContent = "unknown";
+            return cprNumInputHint.textContent = "Invalid CPR: must consist of 10 digits"
+        }
+
+        const cprObj = getCprInfo(cprValue);
+        isCPRValid.textContent = cprObj.valid ? 'valid' : 'invaild';
+        gender.textContent = cprObj.gender;
+        birth.textContent = `${cprObj.date}`;
+        age.textContent = `${cprObj.age}`;
+        return cprObj;
+    }
+
+    cpr.addEventListener('change', checkCPR);
+    cpr.addEventListener('keyup', checkCPR);
+
+    // console.log(checkCPR('1903800174'));
+    // console.log(checkCPR('1102954951'));
+</script>
+
+<BaseLayout title="CPR-number">
+    <main class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16">
+        <section id="projects_section" class="col-[2/3] px-4 flex flex-col gap-12">
+            <h1 class="text-7xl text-center uppercase font-black">CPR number detector</h1>
+
+            <form action="" class="flex flex-col gap-4 [&>div]:flex [&>div]:flex-col [&>div]:gap-4 [&>div>input]:p-4 [&>div>input]:rounded-xl">
+                <div>
+                    <label for="cpr-num">Type your cpr number</label>
+                    <input id="cpr-num" type="text" name="cpr-num" value="" placeholder="Type CPR number" />
+                    <p class="cpr-num-hint"></p>
+                </div>
+            </form>
+            <article>
+                <h3>CPR is <span class="isCPRValid font-bold">invaild</span></h3>
+                <h3>Age: <span class="age font-bold">unknown</span></h3>
+                <h3>Birth: <span class="birth font-bold">unknown</span></h3>
+                <h3>Gender: <span class="gender font-bold">unknown</span></h3>
+            </article>
+        </section>
+    </main>
+</BaseLayout>
+
+<style>
+    .invalid {
+        content: '✕';
+        color: red;
+        font-weight: 800;
+    }
+    .valid {
+        content: '✔';
+        color: green;
+    }
+</style>

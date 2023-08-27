@@ -1,0 +1,12 @@
+### Code some small projects
+- [ ] Make a fitler function to filter in projects or other things
+- [ ] cpr number scanner
+- [ ] password generater
+- [ ] qr scanner
+- [ ] three js
+- [ ] look at https://www.frontendmentor.io/ for more projects
+- [ ] todo app
+- [ ] blog
+- [ ] some node.js
+- [ ] something with a db
+- [ ] Use this somewhere: https://www.kirilv.com/canvas-confetti/

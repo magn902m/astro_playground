@@ -1,0 +1,50 @@
+---
+import ProjectCard from "../components/ProjectCard.astro";
+import ScrollDown from "../components/ScrollDown.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import projectData from "../data/projects.json";
+---
+
+<BaseLayout title="Magnus Nielsen - Web developer, multimedia designer & a lot more">
+    <main
+        class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16"
+    >
+        <section
+            id="intro_section"
+            class="col-[1/4] px-4 h-[95vh] flex flex-col justify-center items-center"
+        >
+            <div class="flex flex-col items-center gap-4">
+                <h1 class="text-7xl uppercase font-black text_gradient bg-gradient-to-r from-text-light dark:from-text-dark to-accent-light dark:to-accent-light bg-clip-text">Magnus Nielsen</h1>
+                <p class="text-xl uppercase font-bold">
+                    Web developer, multimedia designer & a lot more
+                </p>
+                <div class="mt-[50%]">
+                    <ScrollDown url="#projects" />
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="col-[2/3] flex flex-col items-center gap-12 px-4">
+            <h2
+                class="text-4xl uppercase font-semibold text_gradient bg-gradient-to-r from-text-light dark:from-text-dark to-accent-light dark:to-accent-light bg-clip-text"
+            >
+                My projects
+            </h2>
+            <article class="flex gap-8 flex-wrap items-center justify-center">
+                {projectData.map((data) => <ProjectCard {...data} />)}
+            </article>
+        </section>
+    </main>
+</BaseLayout>
+
+<style>
+    .text_gradient {
+        -webkit-text-fill-color: transparent;
+    }
+
+    #intro_section {
+        background-image: url("/assets/images/intro_bg.svg");
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
