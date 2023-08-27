@@ -2,7 +2,7 @@
     {
         "heading": "Twitte clone",
         "descShort": "Building a fullstack web app, with the core features of Twitter",
-        "descLong": "descLong",
+        "descLong": "In this project we had to build a clone of Twitter to learn and gain an understanding of the basic elements of web development and databases. To build this clone I have used python with bottle, sqlite, css, js and html with developed templating from bottle. In addition to this, I have worked at pyhonanywhere, where the app is hosted. You are welcome to try signing up, posting, and playing aruond with the app. Just click the button to start exploring.",
         "img": "twitter_clone.png",
         "alt": "Twitte clone",
         "localHref": "twitter-clone",
@@ -23,7 +23,7 @@
     {
         "heading": "Webshop for payment terminals",
         "descShort": "The final project for my multimedia designer education",
-        "descLong": "descLong",
+        "descLong": "In this project, we had to solve a case, to reduce the number of phone calls, the possibility of adapting the products to the customers' visual style and to bring sustainability into the design and the product. To achieve this we used react, firebase, three.js and a bunch of other tools to build a prototype. If you want to see how we tried to solve the case, click the button.",
         "img": "webshop_payment_terminals.png",
         "alt": "Webshop",
         "localHref": "webshop-payment-terminals",

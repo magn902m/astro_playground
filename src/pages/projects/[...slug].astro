@@ -1,6 +1,6 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import projectData from "../../data/projects.json";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import projectData from '../../data/projects.json';
 
 interface Props {
     heading: string;
@@ -18,61 +18,60 @@ export async function getStaticPaths() {
     return projectData.map((project) => {
         return {
             params: {
-                slug: project["localHref"],
+                slug: project['localHref'],
             },
             props: { ...project },
         };
     });
 }
 
-const { heading, descShort, descLong, img, alt, localHref, prodHref, githubHref, skills } =
-    Astro.props;
+const { heading, descShort, descLong, img, alt, localHref, prodHref, githubHref, skills } = Astro.props;
 ---
 
-<!-- <script>
-    document.querySelector("#fetch").addEventListener("click", fetch)
-    async function fetch() {
-        const url = "../../data/projects.json"
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-    }
-</script>
-<button id="fetch">Fetch</button> -->
 <BaseLayout title="Project">
-    <main
-        class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16"
-    >
-        <section
-            id="projects_section"
-            class="col-[2/3] px-4 flex flex-col justify-center items-center gap-12"
-        >
+    <main class="w-full grid grid-cols-[1fr_minmax(0,1400px)_1fr] items-center place-content-center gap-16 my-16">
+        <section id="projects_section" class="col-[2/3] px-4 flex flex-col justify-center items-center gap-12">
             <h1 class="text-7xl text-center uppercase font-black">{heading}</h1>
-            <article class="flex gap-8 flex-wrap items-center justify-center">
-                <img src={"/assets/images/projects/" + img} alt={alt} class="rounded-xl w-1/2" />
+            <article class="grid md:grid-cols-2 gap-8 items-center justify-center">
+                <div class="flex self-start">
+                    <a href={prodHref}>
+                        <img src={'/assets/images/projects/' + img} alt={alt} class="rounded-xl" />
+                    </a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <p>{descLong}</p>
 
-                <a
-                    href={prodHref}
-                    class="inline-block relative bg-accent-light rounded-xl mt-auto max-w-lg group hover:-translate-y-2 transition duration-150"
-                    >Demo</a
-                >
-                <a
-                    href={githubHref}
-                    class="inline-block relative bg-accent-light rounded-xl mt-auto max-w-lg group hover:-translate-y-2 transition duration-150"
-                    >Github</a
-                >
+                    <div>
+                        <h3 class="text-2xl uppercase font-bold">Skills used</h3>
+                        <ul class="list-disc pl-8">
+                            {skills.map((skill) => <li class="">{skill}</li>)}
+                        </ul>
+                    </div>
 
-                <p>{descLong}</p>
-
-                <p>wrong format: {skills}</p>
-                <div class="flex gap-4">
-                {
-                    skills.map((skill) => {
-                        <p>{skill}</p>;
-                    })
-                }
+                    <div>
+                        <h3 class="text-2xl uppercase font-bold">Other</h3>
+                        <a href={prodHref} class="btn__hover hover:text-text-dark inline-block bg-accent-light py-2 px-3 rounded-xl cursor-pointer"
+                            >Live demo</a
+                        >
+                        <a href={githubHref} class="btn__hover hover:text-text-dark inline-block bg-accent-light py-2 px-3 rounded-xl cursor-pointer"
+                            >Github code</a
+                        >
+                    </div>
                 </div>
             </article>
         </section>
     </main>
 </BaseLayout>
+
+<style>
+    .btn__hover {
+        background: linear-gradient(0deg, var(--color-primary-light), var(--color-primary-light)) no-repeat right bottom / 0 var(--bg-h);
+        transition: background-size 350ms;
+        --bg-h: 100%;
+    }
+
+    .btn__hover:where(:hover, :focus-visible) {
+        background-size: 100% var(--bg-h);
+        background-position-x: left;
+    }
+</style>
